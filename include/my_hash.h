@@ -2,7 +2,6 @@
 #include <cstdlib>
 #include <vector>
 
-#define HASH_SIZE 17011;
 /**
  *This file holds all the hashmap code
  *@author Nabeel Vali, Runquan Ye
@@ -20,7 +19,7 @@ class my_hash{
 	 */
 	
 	my_hash(){
-	  //HASH_SIZE = 17011;
+	  HASH_SIZE = 17011;
 	  hashData.resize(HASH_SIZE);
 	}
 
@@ -45,41 +44,31 @@ class my_hash{
 	T & get(const std::string name){
 		int index = hashData[name];
 		if(hashData[index] -> name == name){
-			return T;
+			return hashData[index];
 		}
 		return NULL;
 	}
 	
-	
-	//we will create the hash functions here 
 
 	/**
-	 *First hashing method is bash on the last 3 characters of the key.
-	 *@returns 0 if the method finish
+	 *First hashing method is bash on the ascii values of the key
+	 *@returns the index to hash to
 	 */
-	int my_hash::Hash1(const std::string key){
-		int hash1 = 0;
-		int index;
-		if(key.length() >= 3){
-			for(int i = key.length() - 1; i > (key.length() - 3); i--){
-				hash1 = hash1 + (int)key[i];
-			}
-		}else{
-			for(int i = key.length(); i > 0; i--){
-				hash1 = hash1 + (int)key[i];
-			}
+	int Hash1(const std::string key){
+		int hashval = 0;
+		
+		for(char ch: key) {
+			hashval+= ch;
 		}
-	
-		index = hash1 % HASH_SIZE;
-	
-		return 0;
+
+		return hashval % HASH_SIZE;
 	}
 
 	/**
 	 *second hashing method is bash on all the characters of the key.
 	 *@returns 0 if the method finish
 	 */
-	int my_hash::Hash2(const std::string key){
+	int Hash2(const std::string key){
 		int hash2 = 0;
 		int index;
 
@@ -89,14 +78,14 @@ class my_hash{
 	
 		index = hash2 % HASH_SIZE;
 
-		return 0;
+		return index;
 	}
 
 	/**
 	 *Last hashing method is bash on the first 3 characters of the key.
 	 *@returns 0 if the method finish
 	 */
-	int my_hash::Hash3(const std::string key){
+	int Hash3(const std::string key){
 		int hash3 = 0;
 		int index;
 		if(key.length() >= 3){
@@ -111,7 +100,7 @@ class my_hash{
 	
 		index = hash3 % HASH_SIZE;
 
-		return 0;
+		return index;
  	}
 
   private:
