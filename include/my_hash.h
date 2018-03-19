@@ -19,6 +19,7 @@ public:
  */
 	
 my_hash(){
+  HASH_SIZE = 17011;
   hashData.resize(HASH_SIZE);
 }
 
@@ -27,11 +28,13 @@ my_hash(){
  *upon inserting the data
  *@returns true or false if collision occurred
  */		
-bool insert(const T & var){
-//write insert code here, we may want to have a param
-//for the index of where to insert the data
-
-
+bool insert(const T & data, int (*hashingFunc)()){
+	int index = (*hashingFunc(data.getName()));
+	hashData[index].insert(hashData[index].begin, std::swap(data));
+	if(hashData[index].size > 1){
+		return true;
+	}
+	return false;
 }
 
 /**
@@ -46,11 +49,17 @@ T & get(const std::string name){
 		
 //we will create the hash functions here 
 
+int hash1(const std::string key){
+
+
+return 0;
+}
+
 private:
   
   /**Vector of vectors to hold our data .**/
   std::vector<std::vector<T> > hashData;
 
   /**Size of the hashtable .**/
-  final int HASH_SIZE = 17011;
-}
+  const int HASH_SIZE;
+};
