@@ -4,7 +4,7 @@
 
 /** 
  *This class represents an interface for our superhero class
- *@author Nabeel Runquan Ye
+ *@author Nabeel Vali, Runquan Ye
  */
 
 class superhero{
