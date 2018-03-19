@@ -35,6 +35,6 @@
 	 *get super hero's name
 	 *@return string, super hero's name
 	 */
-	std::string superhero::getName(){
+	std::string superhero::getName() const{ 
 		return name;
 	}

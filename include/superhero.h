@@ -22,7 +22,7 @@ public:
 	 *get super hero's name
 	 *@return string, super hero's name
 	 */
-	std::string getName(); 
+	std::string getName() const; 
 
 
 

@@ -19,19 +19,20 @@ class my_hash{
 	 */
 	
 	my_hash(){
-	  HASH_SIZE = 17011;
+	 // HASH_SIZE = 17011;
 	  hashData.resize(HASH_SIZE);
 	}
 
 	/**
 	 *Returns true or false depending on whether there was a collision
-	 *upon inserting the data
+	 *upon inserting the data, data will be inserted regardless
 	 *@returns true or false if collision occurred
 	 */		
-	bool insert(const T & data, int (*hashingFunc)()){
-		int index = (*hashingFunc(data.getName()));
-		hashData[index].insert(hashData[index].begin, std::swap(data));
-		if(hashData[index].size > 1){
+	bool insert(const T &data){
+		std::string name = data.getName();
+		int index = Hash1(name);
+		hashData[index].insert(hashData[index].begin(), data);
+		if(hashData[index].size() > 1){
 			return true;
 		}
 		return false;
@@ -42,6 +43,7 @@ class my_hash{
 	 *@returns superhero with specified name if present
 	 */
 	T & get(const std::string name){
+<<<<<<< Updated upstream
 		int index1 = Hash1(name);
 		int index2 = Hash2(name);
 		int index3 = Hash3(name);
@@ -52,6 +54,13 @@ class my_hash{
 			}			
 		}	
 		
+=======
+
+		int index = hashData[name];
+		if(hashData[index] -> name == name){
+			return hashData[index];
+		}
+>>>>>>> Stashed changes
 		return NULL;
 	}
 	
@@ -115,5 +124,5 @@ class my_hash{
 	  std::vector<std::vector<T> > hashData;
 
 	  /**Size of the hashtable .**/
-	  static const int HASH_SIZE;
+	  const int HASH_SIZE = 17011;
 };
