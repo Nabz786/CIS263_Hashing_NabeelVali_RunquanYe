@@ -43,7 +43,7 @@ class my_hash{
 	 *@returns superhero with specified name if present
 	 */
 	T & get(const std::string name){
-<<<<<<< Updated upstream
+
 		int index1 = Hash1(name);
 		int index2 = Hash2(name);
 		int index3 = Hash3(name);
@@ -52,16 +52,7 @@ class my_hash{
 			if(hashData[index1][i].name == name){
 				return hashData[index1][i];
 			}			
-		}	
-		
-=======
-
-		int index = hashData[name];
-		if(hashData[index] -> name == name){
-			return hashData[index];
 		}
->>>>>>> Stashed changes
-		return NULL;
 	}
 	
 
