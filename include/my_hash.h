@@ -42,10 +42,16 @@ class my_hash{
 	 *@returns superhero with specified name if present
 	 */
 	T & get(const std::string name){
-		int index = hashData[name];
-		if(hashData[index] -> name == name){
-			return hashData[index];
-		}
+		int index1 = hash1(name);
+		int index2 = hash2(name);
+		int index3 = hash3(name)
+		
+		for(int i = 0; i < hashData[index1].size(); i++){
+			if(hashData[index1][i].name == name){
+				return hashData[index1][i];
+			}			
+		}	
+		
 		return NULL;
 	}
 	
