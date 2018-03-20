@@ -86,8 +86,8 @@ int main(int argc, char** argv){
 	}
 
 	bool isAlive(std::string &alive){
-		if(!alive.empty() && alive.at(0) == 'D'){
-			return false;
+		if(!alive.empty() && alive.at(0) == 'L'){
+			return true;
 		}
-		return true;
+		return false;
 	}
