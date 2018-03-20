@@ -30,7 +30,10 @@ class my_hash{
 	 */		
 	bool insert(const T &data){
 		std::string name = data.getName();
-		int index = Hash1(name);
+	//	std::cout << name << std::endl;
+	//	int index = Hash1(name);
+	//	int index = Hash2(name);
+		int index = Hash3(name);
 		hashData[index].insert(hashData[index].begin(), data);
 		if(hashData[index].size() > 1){
 			return true;
@@ -71,20 +74,21 @@ class my_hash{
 	}
 
 	/**
-	 *second hashing method is bash on all the characters of the key.
-	 *@returns 0 if the method finish
+	 *Second algorithm is an implementation of the djb2 algorithm
+	 *Found on stackoverflow at https://stackoverflow.com/questions/33325191/passing-a-string-object-into-a-djb2-hash-function
+	 *@returns index to hash at
 	 */
 	int Hash2(const std::string key){
-		int hash2 = 0;
-		int index;
-
-		for(int i = 0; i< key.length(); i++){
-			hash2 = hash2 + (int)key[i];
-		}
 	
-		index = hash2 % HASH_SIZE;
+		unsigned long hash = 5381;
+		int c; 
+		
+		for(int i = 0; i < key.length(); ++i){
+			c = (int) key[i];
+			hash = ((hash << 5) + hash ) + c;
+		}
 
-		return index;
+		return hash % HASH_SIZE;
 	}
 
 	/**
@@ -93,7 +97,7 @@ class my_hash{
 	 */
 	int Hash3(const std::string key){
 		int hash3 = 0;
-		int index;
+		
 		if(key.length() >= 3){
 			for(int i = 0; i< 3; i++){
 				hash3 = hash3 + (int)key[i];
@@ -104,9 +108,7 @@ class my_hash{
 			}
 		}
 	
-		index = hash3 % HASH_SIZE;
-
-		return index;
+		return hash3 % HASH_SIZE;
  	}
 
   private:
