@@ -14,7 +14,7 @@ public:
 	 *Constructor to initialize the super hero
 	 */	
   	superhero(int page_id, std::string name, std::string urlslug, std::string id,
-		std::string alignment, char eye_color, char hair_color, char sex,
+		std::string alignment, std::string eye_color, std::string hair_color, char sex,
 	  	std::string gsm, bool alive, int app,
             	std::string first_app, int year);
 
@@ -43,10 +43,10 @@ private:
   	std::string alignment;
 
 	/**super hero's eye color*/
-  	char eye_color;
+  	std::string eye_color;
 	
 	/**super hero's hair color*/
-  	char hair_color;
+  	std::string hair_color;
 
 	/**super hero's gender*/
   	char sex;
