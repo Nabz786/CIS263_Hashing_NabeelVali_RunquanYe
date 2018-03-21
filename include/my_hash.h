@@ -25,7 +25,7 @@ class my_hash{
 	/**
 	 *Returns true or false depending on whether there was a collision
 	 *upon inserting the data, data will be inserted regardless
-	 *@returns true or false if collision occurred
+	 *@returns bool - true or false if collision occurred
 	 */		
 	bool insert(const T &data, int hashFunction){
 		
@@ -42,7 +42,7 @@ class my_hash{
 
 	/**
 	 *Returns data based on the name parameter
-	 *@returns superhero with specified name if present
+	 *@returns superhero - superhero with specified name
 	 */
 	T & get(const std::string name){
 
@@ -50,6 +50,7 @@ class my_hash{
 		
 		for(int i = 0; i < hashData[index].size(); i++){
 			if(hashData[index][i].getName() == name){
+				std::cout << "Superhero was found!" << std::endl;
 				return hashData[index][i];
 			}		
 		}
@@ -62,6 +63,7 @@ class my_hash{
 	/**
  	*Returns index to hash at from specified hashing function
 	*1 will get returned by default
+	*@returns int - index to hash at
 	*/
 	int getIndex(const std::string name){
 		switch(getFuncIdent()){
@@ -80,7 +82,7 @@ class my_hash{
 
 	/** 
  	*Returns index which indentifies a hashfunction	
-	*returns int the function that was selected
+	*@returns int - the function that was selected
  	**/ 	
 	int getFuncIdent(){
 		return whichHashFunction;
@@ -96,7 +98,7 @@ class my_hash{
 	 /**
 	 *First hashing method is based on the ascii values of the key
 	 *This was obtained from the lecture slides
-	 *@returns the index to hash to
+	 *@returns int - index to hash to
 	 */
 	int Hash1(const std::string key){
 		int hashval = 0;
@@ -111,7 +113,7 @@ class my_hash{
 	/**
 	 *Second algorithm is an implementation of the djb2 algorithm
 	 *Found on stackoverflow at https://stackoverflow.com/questions/33325191/passing-a-string-object-into-a-djb2-hash-function
-	 *@returns index to hash at
+	 *@returns int - index to hash to
 	 */
 	int Hash2(const std::string key){
 	
@@ -128,7 +130,7 @@ class my_hash{
 
 	/**
 	 *Last hashing method is based on the first 3 characters of the key.
-	 *@returns 0 if the method finish
+	 *@returns int - index to hash to
 	 */
 	int Hash3(const std::string key){
 		int hash3 = 0;

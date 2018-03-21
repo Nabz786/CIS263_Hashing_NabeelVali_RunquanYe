@@ -11,7 +11,7 @@ class superhero{
 
 public:
 	/**
-	 *Constructor to initialize the super hero
+	 *Constructor to initialize a superr hero
 	 */	
   	superhero(int page_id, std::string name, std::string urlslug, std::string id,
 		std::string alignment, std::string eye_color, std::string hair_color, char sex,
@@ -19,7 +19,7 @@ public:
             	std::string first_app, int year);
 
 	/**
-	 *get super hero's name
+	 *Returns the name of the hero
 	 *@return string, super hero's name
 	 */
 	std::string getName() const; 

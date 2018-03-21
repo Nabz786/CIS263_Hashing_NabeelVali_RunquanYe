@@ -32,7 +32,7 @@
 
 
 	/**
-	 *get super hero's name
+	 *Returns the name of the superhero
 	 *@return string, super hero's name
 	 */
 	std::string superhero::getName() const{ 
