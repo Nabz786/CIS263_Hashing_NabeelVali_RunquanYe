@@ -3,7 +3,8 @@
 #include <vector>
 
 /**
- *This file holds all the hashmap code
+ *This file holds all the hashmap code, including the 3 hashing functions
+ *Version 1.0, March 2018
  *@author Nabeel Vali, Runquan Ye
  */
 
@@ -15,11 +16,9 @@ class my_hash{
   public:
 
 	/**
-	 *Constructor to initialize our hashtable
+	 *Constructor to resize our hashmap to the specified size of 17011
 	 */
-	
 	my_hash(){
-	 // HASH_SIZE = 17011;
 	  hashData.resize(HASH_SIZE);
 	}
 
@@ -28,12 +27,12 @@ class my_hash{
 	 *upon inserting the data, data will be inserted regardless
 	 *@returns true or false if collision occurred
 	 */		
-	bool insert(const T &data){
-		std::string name = data.getName();
-	//	std::cout << name << std::endl;
-	//	int index = Hash1(name);
-	//	int index = Hash2(name);
-		int index = Hash3(name);
+	bool insert(const T &data, int hashFunction){
+		
+		setFuncIdent(hashFunction);
+		int index = getIndex(data.getName());
+		
+
 		hashData[index].insert(hashData[index].begin(), data);
 		if(hashData[index].size() > 1){
 			return true;
@@ -47,20 +46,56 @@ class my_hash{
 	 */
 	T & get(const std::string name){
 
-		int index1 = Hash1(name);
-		int index2 = Hash2(name);
-		int index3 = Hash3(name);
+		int index = getIndex(name);
 		
-		for(int i = 0; i < hashData[index1].size(); i++){
-			if(hashData[index1][i].name == name){
-				return hashData[index1][i];
-			}			
+		for(int i = 0; i < hashData[index].size(); i++){
+			if(hashData[index][i].getName() == name){
+				return hashData[index][i];
+			}		
 		}
-	}
-	
 
+		throw "Sorry! Superhero not found!";
+	}
+
+  private:
+	
 	/**
-	 *First hashing method is bash on the ascii values of the key
+ 	*Returns index to hash at from specified hashing function
+	*1 will get returned by default
+	*/
+	int getIndex(const std::string name){
+		switch(getFuncIdent()){
+			case 1:
+				return Hash1(name);
+				break;
+			case 2: 
+				return Hash2(name);
+				break;
+			case 3:
+				return Hash3(name);
+				break;	
+		}
+		return 1;	
+	}
+
+	/** 
+ 	*Returns index which indentifies a hashfunction	
+	*returns int the function that was selected
+ 	**/ 	
+	int getFuncIdent(){
+		return whichHashFunction;
+	}
+
+	/** 
+ 	*Sets the function identifier param 	
+ 	*/
+	void setFuncIdent(int funcIdent){
+		whichHashFunction = funcIdent;
+	}
+	 
+	 /**
+	 *First hashing method is based on the ascii values of the key
+	 *This was obtained from the lecture slides
 	 *@returns the index to hash to
 	 */
 	int Hash1(const std::string key){
@@ -92,7 +127,7 @@ class my_hash{
 	}
 
 	/**
-	 *Last hashing method is bash on the first 3 characters of the key.
+	 *Last hashing method is based on the first 3 characters of the key.
 	 *@returns 0 if the method finish
 	 */
 	int Hash3(const std::string key){
@@ -110,12 +145,14 @@ class my_hash{
 	
 		return hash3 % HASH_SIZE;
  	}
-
-  private:
   
 	  /**Vector of vectors to hold our data .**/
 	  std::vector<std::vector<T> > hashData;
 
 	  /**Size of the hashtable .**/
 	  const int HASH_SIZE = 17011;
+
+	  /** Hash function identifier. **/
+	  int whichHashFunction = 0;
 };
+
